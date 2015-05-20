@@ -20,6 +20,8 @@ public class MainActivity extends Activity {
     private int count = 0;
     private TextView mtextView;
     private Message msg = new Message();
+    private Vibrator mVibrator;
+	private long [] pattern = {100,400,100,400}; 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -38,9 +40,9 @@ public class MainActivity extends Activity {
 		 
 		TextView textView = (TextView)findViewById(R.id.Display);
 		textView.setText("button clicked!");
-		Vibrator vibrator = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE); 
-		long [] pattern = {100,400,100,400};   
-        vibrator.vibrate(pattern,-1);
+		//Vibrator vibrator = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
+		mVibrator = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);  
+        mVibrator.vibrate(pattern,-1);
         
         mtimer.schedule(new TimerTask(){
 
@@ -52,6 +54,7 @@ public class MainActivity extends Activity {
 	        	switch (count)
 	            {
 	            case 1:
+	            	msg = mhandler.obtainMessage();
 	            	msg.what = 1;
 	                mhandler.sendMessage(msg);
 	            	break;
@@ -65,6 +68,7 @@ public class MainActivity extends Activity {
 	            case 31:
 	            case 34:
 	            case 37:
+	            	msg = mhandler.obtainMessage();
 	            	msg.what = 2;
 	                mhandler.sendMessage(msg);
 	            	break;
@@ -78,14 +82,17 @@ public class MainActivity extends Activity {
 	            case 32:
 	            case 35:
 	            case 38:
+	            	msg = mhandler.obtainMessage();
 	            	msg.what = 3;
 	                mhandler.sendMessage(msg);
 	            	break;
 	            case 40:
+	            	msg = mhandler.obtainMessage();
 	            	msg.what = 4;
 	                mhandler.sendMessage(msg);
 	            	break;
 	            case 50:
+	            	msg = mhandler.obtainMessage();
 	            	msg.what = 5;
 	                mhandler.sendMessage(msg);
 	            	break;
@@ -104,22 +111,27 @@ public class MainActivity extends Activity {
 			case 1:
 				mtextView.setText("热身");
 				Log.d("hehe", "热身");
+				mVibrator.vibrate(pattern,-1);
 				break;
 			case 2:
 				mtextView.setText("加速");
 				Log.d("hehe", "加速");
+				mVibrator.vibrate(pattern,-1);
 				break;
 			case 3:
 				mtextView.setText("慢跑");
 				Log.d("hehe", "慢跑");
+				mVibrator.vibrate(pattern,-1);
 				break;
 			case 4:
 				mtextView.setText("拉伸");
 				Log.d("hehe", "拉伸");
+				mVibrator.vibrate(pattern,-1);
 				break;
 			case 5:
 				mtextView.setText("结束");
 				Log.d("hehe", "结束");
+				mVibrator.vibrate(pattern,-1);
 			default:
 				break;
 			}
